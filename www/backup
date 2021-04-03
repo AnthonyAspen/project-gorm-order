@@ -1,0 +1,23 @@
+<html>
+<head>
+</head>
+<body>
+    <ol id="products"></ol>
+</body>
+        <script>
+            function update(){
+                            var req = new XMLHttpRequest();
+                            req.onreadystatechange = function(resp, a, b){
+                                            lines = JSON.parse(req.response).Lines;
+                                            s = "";
+                                            for (i = 0;i<lines.length;i++)
+                                                s += "<li>"+lines[i]+"</li>";
+                                            document.getElementById("products").innerHTML = s;
+                                        }
+                            req.open("GET","http://127.0.0.1:8080/get",true)
+                            req.send(null);
+                        }
+                        update();
+                        //setInterval(update,1000);
+        </script>
+</html>

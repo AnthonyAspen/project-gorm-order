@@ -1,0 +1,48 @@
+
+<html>
+<head>
+</head>
+<body>
+    <button onclick="update()">Click me</button>
+    <ol id="list">
+    </ol>
+
+ <p id="output"></p>       
+</body>
+        <script>
+            var name 
+            window.onload = function(){
+    name = prompt("What's your name?");
+};
+
+            function update(){
+    var xhr = new XMLHttpRequest(),
+    method = "GET",
+    url = "http://127.0.0.1:8080/get?first=" + name;
+
+xhr.open(method, url, true);
+xhr.onreadystatechange = function () {
+        if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            console.log(xhr.responseText);
+                        //let str = JSON.stringify(xhr.responseText);
+                        //document.getElementById("text").innerHTML = xhr.responseText;
+                        let str = JSON.parse(xhr.responseText)
+                       string = "" 
+                        for (i=0;i<str.length;i++){
+                       first = str[i];
+                                        if (first != null){
+
+                        console.log(first) 
+                        string += "<li>" + JSON.stringify(first) + "</li>"
+                                                    }
+                                                        
+                                    }
+
+                        document.getElementById("list").innerHTML = string;
+                                    }
+    };
+xhr.send();
+                        }
+                        //setInterval(update,1000);
+        </script>
+</html>
